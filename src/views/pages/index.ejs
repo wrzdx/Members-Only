@@ -16,7 +16,9 @@
       <%- include("./../partials/posts.ejs") %>
       <% } else if (locals.page==="login") { %>
       <%- include("./../partials/login.ejs") %>
-      <% } else  { %>
+      <% } else if (locals.page==="register") { %>
+      <%- include("./../partials/register.ejs") %>
+      <% }  else  { %>
       <p class="empty">Unknown Page</p>
       <% } %>
     </main>

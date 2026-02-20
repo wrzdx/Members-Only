@@ -2,13 +2,25 @@ import passport from "passport"
 import bcrypt from "bcryptjs"
 import db from "./../db/queries.js"
 
-const getPosts = async (req, res, next) => {
+const getPosts = async (req, res) => {
   const posts = await db.getPosts()
 
   res.render("index", {
     page: "posts",
     currentUser: req.user,
     posts,
+  })
+}
+
+const getLogin = async (req, res, next) => {
+  res.render("index", {
+    page: "login",
+  })
+}
+
+const getRegister = async (req, res, next) => {
+  res.render("index", {
+    page: "register",
   })
 }
 
@@ -37,4 +49,11 @@ const getLogout = (req, res, next) => {
   })
 }
 
-export default { getPosts, getLogout, postLogin, postSignUp }
+export default {
+  getPosts,
+  getLogin,
+  getRegister,
+  getLogout,
+  postLogin,
+  postSignUp,
+}

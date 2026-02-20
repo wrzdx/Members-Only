@@ -7,7 +7,8 @@ import contoller from "../controllers/contoller.js"
 const router = Router()
 
 router.get("/", contoller.getPosts)
-
+router.get("/login", contoller.getLogin)
+router.get("/register", contoller.getRegister)
 // router.post("/sign-up", contoller.postSignUp)
 // router.post(
 //   "/login",
