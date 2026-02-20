@@ -22,9 +22,24 @@ async function createNewUser(username, passwordHash, fullname) {
 }
 
 async function getPosts() {
-  const { rows } = await pool.query("SELECT * FROM post")
+  const { rows } = await pool.query(
+    "SELECT post.*, member.fullname, member.username FROM post JOIN member ON member.id=post.user_id ORDER BY post.created_at",
+  )
 
   return rows
 }
 
-export default { getUserByUsername, getUserById, createNewUser, getPosts }
+async function createPost(userId, title, desc) {
+  const { rows } = await pool.query(
+    "INSERT INTO post (title, description, user_id) VALUES ($1, $2, $3)",
+    [title, desc, userId],
+  )
+}
+
+export default {
+  getUserByUsername,
+  getUserById,
+  createNewUser,
+  getPosts,
+  createPost,
+}

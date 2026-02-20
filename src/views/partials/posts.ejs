@@ -1,6 +1,17 @@
+<% if (!locals.currentUser) {%>
 <div class="login-notification">
   To create a post, you need to <a href="/login">login</a> first.
 </div>
+<% } else {%>
+<a href="/new-post" class="button">New post</a>
+<% } %>
 <div class="posts">
+  <% if (posts.length === 0) { %>
   <p class="empty">No post available</p>
+  <% } else {%>
+  <% posts.forEach((post) => { %>
+  <%- include("./post.ejs", {post}) %>
+  <% }) %>
+
+  <% } %>
 </div>

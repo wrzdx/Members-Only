@@ -18,6 +18,8 @@
       <%- include("./../partials/login.ejs") %>
       <% } else if (locals.page==="register") { %>
       <%- include("./../partials/register.ejs") %>
+      <% } else if (locals.page==="newPost") { %>
+      <%- include("./../partials/newPost.ejs") %>
       <% }  else  { %>
       <p class="empty">Unknown Page</p>
       <% } %>

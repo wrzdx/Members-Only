@@ -9,11 +9,13 @@ const router = Router()
 router.get("/", contoller.getPosts)
 router.get("/login", contoller.getLogin)
 router.get("/register", contoller.getRegister)
+router.get("/new-post", contoller.getNewPost)
 router.post("/register", contoller.postSignUp)
 router.post(
   "/login",
   contoller.postLogin
 )
+router.post("/new-post", contoller.postNewPost)
 
 router.get("/logout", contoller.getLogout)
 export default router

@@ -187,11 +187,6 @@ main {
   text-decoration: underline;
 }
 
-.posts {
-  height: 100%;
-  display: grid;
-}
-
 .empty {
   margin: auto;
 }
@@ -214,7 +209,8 @@ main {
   font-size: 1.4rem;
 }
 
-.form p input:not([type="checkbox"]) {
+.form p input:not([type="checkbox"]),
+.form p textarea {
   display: block;
   width: 100%;
   background-color: transparent;
@@ -223,6 +219,13 @@ main {
   margin-top: 0.5rem;
   color: var(--text);
   padding: 0.25rem 0.5rem;
+  resize: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.form p textarea::-webkit-scrollbar {
+  display: none;
 }
 .form p:has(input:not([type="checkbox"])) label {
   font-weight: 500;
@@ -256,7 +259,10 @@ main {
 }
 
 .options {
-  display: none;
+  display: flex;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
   position: absolute;
   width: 100%;
   list-style: none;
@@ -266,14 +272,60 @@ main {
   padding: 0.25rem;
   font-weight: 500;
   font-size: 0.9rem;
+  will-change: transform, opacity;
+  transition:
+    0.25s transform,
+    0.25s opacity;
 }
 .options a {
   color: rgb(255, 26, 26);
 }
 .menu[aria-expanded="true"] .options {
-  display: flex;
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.menu svg {
+  will-change: transform;
+  transition: 0.25s transform;
 }
 
 .menu[aria-expanded="true"] svg {
   transform: rotate(0.5turn);
+}
+
+.posts {
+  margin-top: 1rem;
+  height: 100%;
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.post {
+  width: 32rem;
+  border: 0.125rem solid var(--bg-lighter);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  line-height: 1.2;
+}
+
+.post .fullname {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.post .info {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.post .title {
+  margin-block: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.post .desc {
+  line-height: 1.5;
+  font-size: 0.9rem;
 }

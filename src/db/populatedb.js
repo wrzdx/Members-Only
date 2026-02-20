@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS post (
   title VARCHAR ( 255 ) NOT NULL,
   description TEXT NOT NULL,
   created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-  userId INTEGER,
-  FOREIGN KEY ( userId ) REFERENCES member ( id )
+  user_id INTEGER,
+  FOREIGN KEY ( user_id ) REFERENCES member ( id )
 );
 `
 

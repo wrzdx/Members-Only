@@ -11,13 +11,13 @@ const getPosts = async (req, res) => {
   })
 }
 
-const getLogin = async (req, res, next) => {
+const getLogin = (req, res, next) => {
   res.render("index", {
     page: "login",
   })
 }
 
-const getRegister = async (req, res, next) => {
+const getRegister = (req, res, next) => {
   res.render("index", {
     page: "register",
   })
@@ -48,11 +48,25 @@ const getLogout = (req, res, next) => {
   })
 }
 
+const getNewPost = (req, res, next) => {
+  res.render("index", {
+    page: "newPost",
+    currentUser: req.user,
+  })
+}
+
+const postNewPost = async (req, res) => {
+  await db.createPost(req.user.id, req.body.title, req.body.desc)
+  res.redirect("/")
+}
+
 export default {
   getPosts,
   getLogin,
   getRegister,
   getLogout,
+  getNewPost,
   postLogin,
   postSignUp,
+  postNewPost
 }
