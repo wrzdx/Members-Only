@@ -1,0 +1,30 @@
+{
+  "name": "nodejs-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "setupDB": "node src/db/populatedb.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wrzdx/nodejs-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/wrzdx/nodejs-template/issues"
+  },
+  "homepage": "https://github.com/wrzdx/nodejs-template#readme",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "pg": "^8.18.0"
+  }
+}
