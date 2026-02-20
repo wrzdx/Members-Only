@@ -4,7 +4,6 @@ import db from "./../db/queries.js"
 
 const getPosts = async (req, res) => {
   const posts = await db.getPosts()
-
   res.render("index", {
     page: "posts",
     currentUser: req.user,
@@ -27,8 +26,8 @@ const getRegister = async (req, res, next) => {
 const postSignUp = async (req, res, next) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    db.createNewUser(req.body.username, hashedPassword)
-    res.redirect("/")
+    await db.createNewUser(req.body.username, hashedPassword, req.body.fullname)
+    res.redirect("/login")
   } catch (error) {
     console.error(error)
     next(error)
@@ -37,7 +36,7 @@ const postSignUp = async (req, res, next) => {
 
 const postLogin = passport.authenticate("local", {
   successRedirect: "/",
-  failureRedirect: "/",
+  failureRedirect: "/login",
 })
 
 const getLogout = (req, res, next) => {

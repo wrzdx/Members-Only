@@ -1,13 +1,48 @@
 <header class="header">
-    <a class="logo" href="/">
-      Members Only
+  <a class="logo" href="/">
+    Members Only
+  </a>
+  <% if (!locals.currentUser) {%>
+  <div class="buttons">
+    <a href="/login" class="button">
+      Login
     </a>
-    <div class="buttons">
-      <a href="/login" class="button">
-        Login
-      </a>
-      <a href="/register" class="button">
-        Register
-      </a>
-    </div>
-  </header>
+    <a href="/register" class="button">
+      Register
+    </a>
+  </div>
+  <% } else {%>
+  <div class="menu">
+    <button class="expand" aria-expanded="false">
+      <%= currentUser.username %>
+    </button>
+
+    <ul class="options">
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+  <% } %>
+  <script>
+    const icon = `
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"/></svg>
+`
+    const menu = document.querySelector(".menu")
+    const expand = menu.querySelector(".expand")
+    expand.innerHTML += icon
+    let isExpanded = false
+    menu.addEventListener("click", (e) => {
+      isExpanded = !isExpanded
+      if (isExpanded) {
+        menu.setAttribute('aria-expanded', 'true')
+      } else {
+        menu.setAttribute('aria-expanded', 'false')
+      }
+      e.stopPropagation()
+    })
+
+    window.addEventListener("click", (e) => {
+      isExpanded = false
+      menu.setAttribute('aria-expanded', 'false')
+    })
+  </script>
+</header>

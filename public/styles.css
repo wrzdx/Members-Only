@@ -32,10 +32,6 @@ svg {
   user-select: none;
 }
 
-svg {
-  fill: currentColor;
-}
-
 input,
 button,
 textarea,
@@ -244,4 +240,40 @@ main {
 .form p input[type="checkbox"] {
   width: 0.85rem;
   aspect-ratio: 1;
+}
+
+.menu {
+  position: relative;
+}
+
+.expand {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  color: var(--primary);
+  font-weight: 500;
+  gap: 0.25ch;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  width: 100%;
+  list-style: none;
+  background-color: var(--bg-lighter);
+  justify-content: center;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.options a {
+  color: rgb(255, 26, 26);
+}
+.menu[aria-expanded="true"] .options {
+  display: flex;
+}
+
+.menu[aria-expanded="true"] svg {
+  transform: rotate(0.5turn);
 }

@@ -8,14 +8,14 @@ async function getUserByUsername(username) {
 }
 
 async function getUserById(id) {
-  const { rows } = await pool.query("SELECT * FROM users WHERE id=$1", [id])
+  const { rows } = await pool.query("SELECT * FROM member  WHERE id=$1", [id])
   return rows[0]
 }
 
-async function createNewUser(username, passwordHash) {
+async function createNewUser(username, passwordHash, fullname) {
   const { rows } = await pool.query(
-    "INSERT INTO member (username, password_hash) VALUES ($1, $2) RETURING *",
-    [username, passwordHash],
+    "INSERT INTO member (username, password_hash, fullname) VALUES ($1, $2, $3) RETURNING *",
+    [username, passwordHash, fullname],
   )
 
   return rows[0]
