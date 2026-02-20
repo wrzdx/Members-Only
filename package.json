@@ -1,30 +1,35 @@
 {
-  "name": "nodejs-template",
+  "name": "members-only",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "node --watch src/app.js",
+    "dev": "nodemon src/app.js",
     "setupDB": "node src/db/populatedb.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wrzdx/nodejs-template.git"
+    "url": "git+https://github.com/wrzdx/Members-Only.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/wrzdx/nodejs-template/issues"
+    "url": "https://github.com/wrzdx/Members-Only/issues"
   },
-  "homepage": "https://github.com/wrzdx/nodejs-template#readme",
+  "homepage": "https://github.com/wrzdx/Members-Only#readme",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "connect-pg-simple": "^10.0.0",
     "dotenv": "^17.3.1",
     "ejs": "^4.0.1",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "express-validator": "^7.3.1",
+    "nodemon": "^3.1.13",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
     "pg": "^8.18.0"
   }
 }
