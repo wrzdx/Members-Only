@@ -8,10 +8,10 @@ const validatePost = [
     .withMessage(
       "Title must be at least 3 characters and at most 255 characters long",
     ),
-  body("description")
+  body("desc")
     .trim()
-    .isLength({ min: 50 })
-    .withMessage("Description must be at least 50 characters long"),
+    .isLength({ min: 3 })
+    .withMessage("Description must be at least 3 characters long"),
 ]
 
 const validateMember = [

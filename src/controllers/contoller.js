@@ -48,25 +48,20 @@ const getRegister = (req, res, next) => {
 const postSignUp = [
   validateMember,
   async (req, res, next) => {
-    try {
-      const errors = validationResult(req)
-      if (!errors.isEmpty()) {
-        const { username, fullname } = req.body
-        return res.render("index", {
-          title: "Members Only | Register",
-          page: "register",
-          errorMessages: errors.array().map((err) => err.msg),
-          defaults: { username, fullname },
-        })
-      }
-      const { password, username, fullname } = matchedData(req)
-      const hashedPassword = await bcrypt.hash(password, 10)
-      await db.createNewUser(username, hashedPassword, fullname)
-      res.redirect("/login")
-    } catch (error) {
-      console.error(error)
-      next(error)
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      const { username, fullname } = req.body
+      return res.render("index", {
+        title: "Members Only | Register",
+        page: "register",
+        errorMessages: errors.array().map((err) => err.msg),
+        defaults: { username, fullname },
+      })
     }
+    const { password, username, fullname } = matchedData(req)
+    const hashedPassword = await bcrypt.hash(password, 10)
+    await db.createNewUser(username, hashedPassword, fullname)
+    res.redirect("/login")
   },
 ]
 
@@ -100,8 +95,19 @@ const postNewPost = [
   checkAuthentication,
   validatePost,
   async (req, res) => {
-    const { userId, title, desc } = matchedData(req)
-    await db.createPost(userId, title, desc)
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      const { title, desc } = req.body
+      return res.render("index", {
+        title: "Members Only | New Post",
+        page: "newPost",
+        errorMessages: errors.array().map((err) => err.msg),
+        defaults: { title, desc },
+        currentUser: req.user,
+      })
+    }
+    const { title, desc } = matchedData(req)
+    await db.createPost(req.user.id, title, desc)
     res.redirect("/")
   },
 ]
@@ -110,7 +116,8 @@ const postConfirm = [
   checkAuthentication,
   async (req, res) => {
     if (req.body.secret === process.env.MEMBERSHIP_SECRET) {
-      await db.updateUserStatus(req.user.id, true.req.user.is_admin)
+      console.log(req.user.id)
+      await db.updateUserStatus(req.user.id, true, req.user.is_admin)
 
       res.json("Success!")
     } else {

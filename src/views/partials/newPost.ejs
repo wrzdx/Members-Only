@@ -1,12 +1,26 @@
 <form action="/new-post" method="post" class="form">
   <h1>New post</h1>
+  <% if (locals.errorMessages?.length) { %>
+  <% errorMessages.forEach((message) => { %>
+  <section class="sign-in-error">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" x2="12" y1="8" y2="12" />
+      <line x1="12" x2="12.01" y1="16" y2="16" />
+    </svg>
+    <p><%= message %></p>
+  </section>
+  <% }); %>
+  <% } %>
   <p>
     <label for="title">Title</label>
-    <input type="text" id="title" name="title" placeholder="Type here...">
+    <input type="text" id="title" name="title" placeholder="Type here..." value="<%= locals.defaults?.title || "" %>">
   </p>
   <p>
     <label for="desc">Description</label>
-    <textarea name="desc" id="desc" placeholder="Type here..."></textarea>
+    <textarea name="desc" id="desc" placeholder="Type here..."><%= locals.defaults?.desc || "" %></textarea>
   </p>
   <button type="submit" class="button">Submit</button>
 </form>

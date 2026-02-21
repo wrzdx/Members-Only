@@ -21,6 +21,21 @@ CREATE TABLE IF NOT EXISTS post (
   user_id INTEGER,
   FOREIGN KEY ( user_id ) REFERENCES member ( id )
 );
+
+-- Users (members)
+INSERT INTO member (username, password_hash, fullname, is_member, is_admin) VALUES
+('simon', 'hashed_password1', 'Simon', TRUE, FALSE),
+('kamina', 'hashed_password2', 'Kamina', TRUE, TRUE),
+('nia', 'hashed_password3', 'Nia', TRUE, FALSE),
+('yoko', 'hashed_password4', 'Yoko', TRUE, FALSE);
+
+-- Posts
+INSERT INTO post (title, description, user_id) VALUES
+('Spiraling Upwards', 'Simon discovers the power within himself to pilot the Lagann and fight the Beastmen.', 1),
+('Fiery Determination', 'Kamina inspires the team with his fearless attitude and dream of reaching the surface.', 2),
+('Nia''s Secret', 'Nia appears and brings hope to Team Dai-Gurren, revealing mysteries of the Spiral King.', 3),
+('Brotherhood and Courage', 'Yoko demonstrates her sharpshooting skills and supports her friends in battle.', 4),
+('The Spiral Nemesis', 'The team faces Lordgenome''s forces and struggles to overcome overwhelming odds.', 2);
 `
 
 const connectionString = process.env.DATABASE_URL
