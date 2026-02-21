@@ -16,6 +16,6 @@ router.post(
   contoller.postLogin
 )
 router.post("/new-post", contoller.postNewPost)
-
+router.post("/confirm-membership", contoller.postConfirm)
 router.get("/logout", contoller.getLogout)
 export default router

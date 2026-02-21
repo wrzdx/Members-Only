@@ -1,7 +1,8 @@
 <div class="post">
-  <p class="fullname"><%= post.fullname %></p>
+  <p class="fullname">
+    <%=locals.currentUser?.is_member ? post.fullname: "######" %></p>
   <p class="info">
-    <%= `@${post.username} • time passed` %>
+    <%= `@${locals.currentUser?.is_member ? post.username : "######"} • ${formatDate(post.created_at)}` %>
   </p>
   <h2 class="title"><%= post.title %></h2>
   <p class="desc"><%= post.description %></p>

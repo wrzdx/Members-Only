@@ -21,9 +21,17 @@ async function createNewUser(username, passwordHash, fullname) {
   return rows[0]
 }
 
+async function updateUserStatus(id, isMember) {
+  const { rows } = await pool.query(
+    "UPDATE member SET is_member=$1 WHERE id=$2 RETURNING *",
+    [isMember, id],
+  )
+  return rows[0]
+}
+
 async function getPosts() {
   const { rows } = await pool.query(
-    "SELECT post.*, member.fullname, member.username FROM post JOIN member ON member.id=post.user_id ORDER BY post.created_at",
+    "SELECT post.*, member.fullname, member.username FROM post JOIN member ON member.id=post.user_id ORDER BY post.created_at DESC",
   )
 
   return rows
@@ -42,4 +50,5 @@ export default {
   createNewUser,
   getPosts,
   createPost,
+  updateUserStatus,
 }

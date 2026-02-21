@@ -16,6 +16,7 @@ app.use(express.static("public"))
 app.use(authSession)
 app.use(passport.session())
 
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 passport.use(localStrategy)

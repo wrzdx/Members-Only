@@ -4,6 +4,12 @@
 </div>
 <% } else {%>
 <a href="/new-post" class="button">New post</a>
+<% if (!locals.currentUser.is_member) {%>
+<div class="get-member-notification">
+  To see usernames, you need to <span class="membership">join our
+    membership</span> first.
+</div>
+<% } %>
 <% } %>
 <div class="posts">
   <% if (posts.length === 0) { %>
@@ -15,3 +21,34 @@
 
   <% } %>
 </div>
+<% if (!locals.currentUser.is_member) {%>
+<script>
+  document.querySelector(".membership")
+    .addEventListener(("click"), async () => {
+      const secret = prompt(
+        'Please enter the super secret password : "My drill is the drill that will pierce the heavens!".'
+      )
+      try {
+        const response = await fetch("/confirm-membership", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            secret
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        alert(result)
+        window.location.reload()
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    })
+</script>
+<% } %>
