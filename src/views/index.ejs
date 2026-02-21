@@ -5,26 +5,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <title>Members Only</title>
+  <title><%= locals.title || "Unknown" %></title>
 </head>
 
 <body>
   <div class="container">
-    <%- include("./../partials/header.ejs") %>
+    <%- include("./partials/header.ejs") %>
     <main>
       <% if (locals.page==="posts") {%>
-      <%- include("./../partials/posts.ejs") %>
+      <%- include("./partials/posts.ejs") %>
       <% } else if (locals.page==="login") { %>
-      <%- include("./../partials/login.ejs") %>
+      <%- include("./partials/login.ejs") %>
       <% } else if (locals.page==="register") { %>
-      <%- include("./../partials/register.ejs") %>
+      <%- include("./partials/register.ejs") %>
       <% } else if (locals.page==="newPost") { %>
-      <%- include("./../partials/newPost.ejs") %>
+      <%- include("./partials/newPost.ejs") %>
       <% }  else  { %>
       <p class="empty">Unknown Page</p>
       <% } %>
     </main>
-    <%- include("./../partials/footer.ejs") %>
+    <%- include("./partials/footer.ejs") %>
   </div>
 </body>
 

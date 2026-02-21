@@ -247,6 +247,15 @@ main {
   aspect-ratio: 1;
 }
 
+.sign-in-error {
+  display: flex;
+  gap: 0.5ch;
+}
+
+.sign-in-error svg {
+  flex: none;
+}
+
 .menu {
   position: relative;
 }

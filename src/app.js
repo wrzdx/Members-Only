@@ -9,7 +9,7 @@ import { deserializer, serializer } from "./auth/transformers.js"
 const PORT = process.env.PORT || 8000
 
 const app = express()
-app.set("views", new URL("./views/pages", import.meta.url).pathname)
+app.set("views", new URL("./views", import.meta.url).pathname)
 app.set("view engine", "ejs")
 app.use(express.static("public"))
 
