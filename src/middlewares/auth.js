@@ -6,4 +6,12 @@ const checkAuthentication = (req, res, next) => {
   res.redirect("/sign-in")
 }
 
-export { checkAuthentication }
+const checkIsAdmin = (req, res, next) => {
+  if (req.user?.is_admin) {
+    return next()
+  }
+
+  res.redirect("/")
+}
+
+export { checkAuthentication, checkIsAdmin }

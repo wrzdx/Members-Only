@@ -17,5 +17,7 @@ router.post(
 )
 router.post("/new-post", contoller.postNewPost)
 router.post("/confirm-membership", contoller.postConfirm)
+router.post("/get-admin", contoller.postMakeAdmin)
+router.post("/delete-post/:id", contoller.deletePost)
 router.get("/logout", contoller.getLogout)
 export default router

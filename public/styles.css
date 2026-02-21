@@ -150,9 +150,8 @@ a {
 }
 
 .footer svg {
-  will-change: transform;
   max-width: 1.2rem;
-  transition: 0.4s transform;
+  transition: 0.25s transform;
 }
 
 .footer a:hover svg {
@@ -259,6 +258,7 @@ main {
   color: var(--primary);
   font-weight: 500;
   gap: 0.25ch;
+  cursor: pointer;
 }
 
 .options {
@@ -267,7 +267,9 @@ main {
   transform: scaleY(0);
   transform-origin: top;
   position: absolute;
-  width: 100%;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 100%;
   list-style: none;
   background-color: var(--bg-lighter);
   border-radius: 0.25rem;
@@ -280,18 +282,21 @@ main {
     0.25s opacity;
 }
 
-.options li {
-  width: 100%;
-}
 .options a {
   display: block;
   text-align: center;
-  width: 100%;
-  color: rgb(255, 26, 26);
+  color: var(--primary);
+  min-width: 100%;
   border-radius: 0.25rem;
-  padding: 0 0.25rem;
+  padding: 0.125rem 0.25rem;
   transition: 0.25s background-color;
+  text-wrap: nowrap;
 }
+
+.options #logout {
+  color: rgb(255, 26, 26);
+}
+
 .options a:hover {
   background-color: var(--bg);
 }
@@ -323,6 +328,7 @@ main {
   padding: 0.5rem 0.75rem;
   border-radius: 0.75rem;
   line-height: 1.2;
+  position: relative;
 }
 
 .post .fullname {
@@ -343,4 +349,25 @@ main {
 .post .desc {
   line-height: 1.5;
   font-size: 0.9rem;
+}
+
+.post .deletePost {
+  width: 2rem;
+  aspect-ratio: 1;
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  border: none;
+  color: var(--primary);
+  padding: 0.25rem;
+  margin: 0.25rem;
+  border-radius: 0.25rem;
+  will-change: background-color;
+  transition: 0.25s background-color;
+}
+
+.post .deletePost:hover {
+  background-color: var(--bg-lighter);
 }

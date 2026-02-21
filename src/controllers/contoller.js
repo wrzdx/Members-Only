@@ -1,10 +1,9 @@
 import passport from "passport"
 import bcrypt from "bcryptjs"
 import db from "./../db/queries.js"
-import { checkAuthentication } from "../middlewares/auth.js"
+import { checkAuthentication, checkIsAdmin } from "../middlewares/auth.js"
 
 const getPosts = async (req, res) => {
-  console.log(req.user)
   const posts = await db.getPosts()
   const formatDate = (dateString) => {
     const diff = Date.now() - new Date(dateString)
@@ -85,12 +84,34 @@ const postConfirm = [
   checkAuthentication,
   async (req, res) => {
     if (req.body.secret === process.env.MEMBERSHIP_SECRET) {
-      await db.updateUserStatus(req.user.id, true)
+      await db.updateUserStatus(req.user.id, true. req.user.is_admin)
 
       res.json("Success!")
     } else {
       res.json("Secret is incorrect, try again")
     }
+  },
+]
+
+const postMakeAdmin = [
+  checkAuthentication,
+  async (req, res) => {
+    if (req.body.secret === process.env.ADMIN_SECRET) {
+      await db.updateUserStatus(req.user.id, req.user.is_member, true)
+
+      res.json("Success!")
+    } else {
+      res.json("Secret is incorrect, try again")
+    }
+  },
+]
+
+const deletePost = [
+  checkAuthentication,
+  checkIsAdmin,
+  async (req, res) => {
+    await db.deletePost(req.params.id)
+    res.json({ success: true })
   },
 ]
 
@@ -103,5 +124,7 @@ export default {
   postLogin,
   postSignUp,
   postNewPost,
-  postConfirm
+  postConfirm,
+  postMakeAdmin,
+  deletePost
 }

@@ -18,7 +18,10 @@
     </button>
 
     <ul class="options">
-      <li><a href="/logout">Logout</a></li>
+      <% if (!locals.currentUser.is_admin) { %>
+      <li><a id="getAdmin" href="/">Get Admin</a></li>
+      <% } %>
+      <li><a id="logout" href="/logout">Logout</a></li>
     </ul>
   </div>
   <% } %>
@@ -27,22 +30,55 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"/></svg>
 `
     const menu = document.querySelector(".menu")
-    const expand = menu.querySelector(".expand")
-    expand.innerHTML += icon
-    let isExpanded = false
-    menu.addEventListener("click", (e) => {
-      isExpanded = !isExpanded
-      if (isExpanded) {
-        menu.setAttribute('aria-expanded', 'true')
-      } else {
-        menu.setAttribute('aria-expanded', 'false')
-      }
-      e.stopPropagation()
-    })
+    if (menu) {
+      const expand = menu.querySelector(".expand")
+      expand.innerHTML += icon
+      let isExpanded = false
+      menu.addEventListener("click", (e) => {
+        isExpanded = !isExpanded
+        if (isExpanded) {
+          menu.setAttribute('aria-expanded', 'true')
+        } else {
+          menu.setAttribute('aria-expanded', 'false')
+        }
+        e.stopPropagation()
+      })
 
-    window.addEventListener("click", (e) => {
-      isExpanded = false
-      menu.setAttribute('aria-expanded', 'false')
-    })
+      window.addEventListener("click", (e) => {
+        isExpanded = false
+        menu.setAttribute('aria-expanded', 'false')
+      })
+    }
+  </script>
+  <script>
+    const getAdmin = document.getElementById("getAdmin")
+    if (getAdmin) {
+      getAdmin.addEventListener("click", async () => {
+        const secret = prompt(
+          'Enter password:'
+        )
+        try {
+          const response = await fetch("/get-admin", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              secret
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const result = await response.json();
+          alert(result)
+          window.location.reload()
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      })
+    }
   </script>
 </header>

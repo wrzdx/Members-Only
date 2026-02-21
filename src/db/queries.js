@@ -21,10 +21,10 @@ async function createNewUser(username, passwordHash, fullname) {
   return rows[0]
 }
 
-async function updateUserStatus(id, isMember) {
+async function updateUserStatus(id, isMember, isAdmin) {
   const { rows } = await pool.query(
-    "UPDATE member SET is_member=$1 WHERE id=$2 RETURNING *",
-    [isMember, id],
+    "UPDATE member SET is_member=$1, is_admin=$3 WHERE id=$2 RETURNING *",
+    [isMember, id, isAdmin],
   )
   return rows[0]
 }
@@ -38,10 +38,14 @@ async function getPosts() {
 }
 
 async function createPost(userId, title, desc) {
-  const { rows } = await pool.query(
+  await pool.query(
     "INSERT INTO post (title, description, user_id) VALUES ($1, $2, $3)",
     [title, desc, userId],
   )
+}
+
+async function deletePost(id) {
+  await pool.query("DELETE FROM post WHERE id=$1", [id])
 }
 
 export default {
@@ -51,4 +55,5 @@ export default {
   getPosts,
   createPost,
   updateUserStatus,
+  deletePost,
 }

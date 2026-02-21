@@ -21,7 +21,7 @@
 
   <% } %>
 </div>
-<% if (!locals.currentUser.is_member) {%>
+<% if (locals.currentUser && !locals.currentUser.is_member) {%>
 <script>
   document.querySelector(".membership")
     .addEventListener(("click"), async () => {
@@ -52,3 +52,16 @@
     })
 </script>
 <% } %>
+
+<script>
+  const deleteButtons = document.querySelectorAll(".deletePost")
+  deleteButtons.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id
+      const response = await fetch(`/delete-post/${id}`, {
+        method: "POST"
+      })
+      if (response.ok) window.location.reload()
+    })
+  })
+</script>
