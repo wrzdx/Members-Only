@@ -82,6 +82,10 @@ body {
   --primary: #ffc805;
 }
 
+html {
+  font-size: 1.2rem;
+}
+
 .container {
   display: grid;
   grid-template-rows: auto 1fr auto;

@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS post (
 -- Users (members)
 INSERT INTO member (username, password_hash, fullname, is_member, is_admin) VALUES
 ('simon', 'hashed_password1', 'Simon', TRUE, FALSE),
-('kamina', 'hashed_password2', 'Kamina', TRUE, TRUE),
+('kamina', 'hashed_password2', 'Kamina', TRUE, FALSE),
 ('nia', 'hashed_password3', 'Nia', TRUE, FALSE),
 ('yoko', 'hashed_password4', 'Yoko', TRUE, FALSE);
 
