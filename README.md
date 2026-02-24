@@ -1,4 +1,4 @@
-# DevLounge
+# Members Only
 
 **Members Only** is an anonymous posting platform for members only. Think of it like an exclusive speakeasy for your thoughts. Only members can see who said what, while outsiders just get the juicy gossip without the receipts.
 
